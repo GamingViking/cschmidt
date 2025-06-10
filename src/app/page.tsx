@@ -49,11 +49,11 @@ export default function Home() {
           </div>
           <div className="flex flex-col">
             <div className="text-white text-xl font-bold text-center mb-2">Remembering Fondly</div>
-            <Interest name="Lost Kingdoms" link="https://en.wikipedia.org/wiki/Lost_Kingdoms" />
-            <Interest name="Dragon Warrior Monsters 2" link="https://en.wikipedia.org/wiki/Dragon_Warrior_Monsters_2" />
-            <Interest name="Horizon Zero Dawn" link="https://en.wikipedia.org/wiki/Horizon_Zero_Dawn" />
-            <Interest name="Bioshock" link="https://en.wikipedia.org/wiki/BioShock" />
-            <Interest name="Morrowind" link="https://en.uesp.net/wiki/Morrowind:Morrowind" />
+            <Interest name="Stardust" link="https://en.wikipedia.org/wiki/Stardust_(2007_film)" />
+            <Interest name="Throne of Glass" link="https://sarahjmaas.com/throne-of-glass-series/" />
+            <Interest name="Harry Potter" link="https://en.wikipedia.org/wiki/Harry_Potter" />
+            <Interest name="Rurouni Kenshin" link="https://en.wikipedia.org/wiki/Rurouni_Kenshin" />
+            <Interest name="My Hero Academia" link="https://en.wikipedia.org/wiki/My_Hero_Academia" />
           </div>
         </div>
         <div className="text-white text-center p-4">Thank you for taking the time to browse my site - I hope you found something you liked! Feel free to reach out to me: cmschmidt12345@gmail.com</div>
