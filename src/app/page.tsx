@@ -19,12 +19,12 @@ export default function Home() {
         <About/>
         <SectionTitle text="Projects" />
         <div className="flex flex-row justify-evenly p-4">
-          <Content text="Fell Seal is an isometric turn-based RPG that channels the spirit of Final Fantasy Tactics into the modern era. It is a game full of possibilities, and my latest passion project has been modding new classes, portraits, and items into the game to creatively expand those exciting possibilities - soon to be a published mod on the nexus!" link={"https://github.com/GamingViking/FellSealClasses"} />
+          <Content text="Fell Seal is an isometric turn-based RPG that channels the spirit of Final Fantasy Tactics in the modern era. It is a game full of possibilities, and my latest passion project has been modding new classes, portraits, and items into the game to creatively expand those exciting possibilities - soon to be a published mod on the nexus!" link={"https://github.com/GamingViking/FellSealClasses"} />
           <ContentImage image={FellSealCoverImage_compressed.src} link="https://www.6eyesstudio.com/fell-seal-arbiter-s-mark" alt="Fell Seal: Arbiter's Mark Cover Image" />
         </div>
         <div className="flex flex-row justify-evenly p-4">
           <ContentImage image={SuperheroWebsiteImage.src} link="https://superherosearch.vercel.app/" alt="Superhero Website Image" />
-          <Content text="I really enjoy working in the front end and wanted to gain some practice calling on a publicaly accessible API. To that end, I created this website which lets you fetch data on superheroes and villains from a database. It is built with Next.js, Typescript and Tailwind and is hosted on Vercel." link="https://github.com/GamingViking/superheroes?tab=readme-ov-file" />
+          <Content text="I really enjoy working in the front end and wanted to gain some practice calling on a publicaly accessible API. To that end, I created a website which lets you fetch data on superheroes and villains from a database. It is built with Next.js, Typescript and Tailwind and is hosted on Vercel." link="https://github.com/GamingViking/superheroes?tab=readme-ov-file" />
         </div>
         <div className="flex flex-row justify-evenly p-4">
           <Content text="I wanted to practice implementing functions and classes while having a little fun, and so I made battleship in C#! This modular game comes with many tweakable settings including grid size, enableing cheats, and different voices for your opponent! Download the game from my github and play in your own terminal!" link="https://github.com/GamingViking/CSharpBattleship" />
