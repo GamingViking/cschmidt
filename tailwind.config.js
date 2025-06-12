@@ -15,6 +15,9 @@ module.exports = {
       "2xl": "1536px",
     },
     extend: {
+      boxShadow: {
+        'btn': 'inset 0px 0px 18px 0',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

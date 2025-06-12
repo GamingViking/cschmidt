@@ -16,7 +16,7 @@ export default function Home() {
         <HeroImage/>
       </div>
       <div className="flex flex-row justify-evenly">
-        <Card text="Fell Seal is an isometric turn-based RPG that channels the spirit of Final Fantasy Tactics in the modern era. It is a game full of possibilities, and my latest passion project has been modding new classes, portraits, and items into the game to creatively expand those exciting possibilities - soon to be a published mod on the nexus!" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src}/>
+        <Card text="Fell Seal is an isometric turn-based RPG that channels the spirit of Final Fantasy Tactics in the modern era. It is a game full of possibilities, and my latest passion project has been modding new classes, portraits, and items into the game to creatively expand those exciting possibilities - soon to be a published mod on the nexus!" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
       </div>
       <div className="bg-gradient-to-b from-slate-500 via-blue-950 to-teal-950 bg-fixed p-4 border-solid">
         <About/>
