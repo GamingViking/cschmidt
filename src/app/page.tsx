@@ -7,6 +7,7 @@ import SectionTitle from "./components/SectionTitle";
 import SuperheroWebsiteImage from "../../public/images/SuperheroWebsiteImage_compressed.png";
 import BattleshipGame from  "../../public/images/BattleshipGame.png";
 import Interest from "./components/Interest";
+import Card from "./components/Card";
 
 export default function Home() {
   return (
@@ -14,11 +15,14 @@ export default function Home() {
       <div className="h-screen overflow-hidden">
         <HeroImage/>
       </div>
+      <div className="flex flex-row justify-evenly">
+        <Card text="Fell Seal is an isometric turn-based RPG that channels the spirit of Final Fantasy Tactics in the modern era. It is a game full of possibilities, and my latest passion project has been modding new classes, portraits, and items into the game to creatively expand those exciting possibilities - soon to be a published mod on the nexus!" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src}/>
+      </div>
       <div className="bg-gradient-to-b from-slate-500 via-blue-950 to-teal-950 bg-fixed p-4 border-solid">
         <About/>
         <SectionTitle text="Projects" />
         <div className="flex md:flex-row flex-col md:justify-evenly items-center p-4">
-          <Content text="Fell Seal is an isometric turn-based RPG that channels the spirit of Final Fantasy Tactics in the modern era. It is a game full of possibilities, and my latest passion project has been modding new classes, portraits, and items into the game to creatively expand those exciting possibilities - soon to be a published mod on the nexus!" link={"https://github.com/GamingViking/FellSealClasses"} />
+          <Content text="Fell Seal is an isometric turn-based RPG that channels the spirit of Final Fantasy Tactics in the modern era. It is a game full of possibilities, and my latest passion project has been modding new classes, portraits, and items into the game to creatively expand those exciting possibilities - soon to be a published mod on the nexus!" link="https://github.com/GamingViking/FellSealClasses" />
           <ContentImage image={FellSealCoverImage_compressed.src} link="https://www.6eyesstudio.com/fell-seal-arbiter-s-mark" alt="Fell Seal: Arbiter's Mark Cover Image" />
         </div>
         <div className="flex md:flex-row flex-col md:justify-evenly items-center p-4">

@@ -1,5 +1,5 @@
+//Not in Use
 import Link from "next/link";
-import react from "react";
 
 interface ContentProps {
     text: string
