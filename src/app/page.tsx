@@ -8,6 +8,7 @@ import SuperheroWebsiteImage from "../../public/images/SuperheroWebsiteImage_com
 import BattleshipGame from  "../../public/images/BattleshipGame.png";
 import Interest from "./components/Interest";
 import Card from "./components/Card";
+import Carousel from "./components/Carousel";
 
 export default function Home() {
   return (
@@ -15,7 +16,15 @@ export default function Home() {
       <div className="h-screen overflow-hidden">
         <HeroImage/>
       </div>
-      <div className="flex flex-row justify-evenly">
+      <Carousel speed="60">
+        <Card text="11111" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
+        <Card text="22222" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
+        <Card text="33333" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
+        <Card text="44444" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
+      </Carousel>
+
+
+      <div className="flex flex-row justify-evenly bg-green-800">
         <Card text="Fell Seal is an isometric turn-based RPG that channels the spirit of Final Fantasy Tactics in the modern era. It is a game full of possibilities, and my latest passion project has been modding new classes, portraits, and items into the game to creatively expand those exciting possibilities - soon to be a published mod on the nexus!" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
       </div>
       <div className="bg-gradient-to-b from-slate-500 via-blue-950 to-teal-950 bg-fixed p-4 border-solid">
