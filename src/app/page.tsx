@@ -16,12 +16,14 @@ export default function Home() {
       <div className="h-screen overflow-hidden">
         <HeroImage/>
       </div>
-      <Carousel speed="60">
-        <Card text="11111" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
-        <Card text="22222" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
-        <Card text="33333" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
-        <Card text="44444" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
-      </Carousel>
+      <div className="bg-red-300 flex justify-center">
+        <Carousel speed="60">
+          <Card text="11111" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
+          <Card text="22222" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
+          <Card text="33333" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
+          <Card text="44444" link="https://github.com/GamingViking/FellSealClasses" linkText="Repo" alt="Fell Seal: Arbiter's Mark Cover Image" image={FellSealCoverImage_compressed.src} />
+        </Carousel>
+      </div>
 
 
       <div className="flex flex-row justify-evenly bg-green-800">

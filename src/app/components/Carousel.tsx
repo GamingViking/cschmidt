@@ -1,47 +1,56 @@
 'use client'
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Carousel = ({children, speed}) => {
+    const [isPaused, setIsPaused] = useState(false);
     const carouselRef = useRef(null);
+    const currentTranslateRef = useRef(0);
+    const animationRef = useRef(null);
+    const isPausedRef = useRef(false);
+
+    useEffect(() => {
+        isPausedRef.current = isPaused;
+    }, [isPaused]);
 
     useEffect(() => {
         const carousel = carouselRef.current;
         if (!carousel) return;
 
         const scrollWidth = carousel.scrollWidth / 2;
-        let animationId;
-        let currentTranslate = 0;
         
         const animateScrolling = () => {
-            currentTranslate += speed / 60;
+            console.log("Is it paused: ", isPaused);
+            if(!isPausedRef.current) {
+                currentTranslateRef.current += speed / 60;         
+                
+                if(currentTranslateRef.current >= scrollWidth) {
+                    currentTranslateRef.current = 0;
+                }
 
-            if(currentTranslate >= scrollWidth) {
-                console.log('Reset! currentTranslate:', currentTranslate, 'scrollWidth:', scrollWidth);
-                currentTranslate = 0;
+                carousel.style.transform = `translateX(-${currentTranslateRef.current}px)`;
             }
-
-            carousel.style.transform = `translateX(-${currentTranslate}px)`;
+            
             requestAnimationFrame(animateScrolling);
+
         }
 
-        animationId = requestAnimationFrame(animateScrolling);
+        animationRef.current = requestAnimationFrame(animateScrolling);
 
         return () => {
-            if (animationId) {
-                cancelAnimationFrame(animationId);
+            if (animationRef.current) {
+                cancelAnimationFrame(animationRef.current);
             }
         }
-    }, [speed]
-);
+    }, [speed]);
 
     const duplicatedChildren = [...children, ...children];
+
     return(
-        <div className="overflow-hidden">
-            <div className="flex flex-row pl-10" ref={carouselRef}>
+        <div className="overflow-hidden w-5/6">
+            <div className="flex flex-row pl-10 gap-10" ref={carouselRef} onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
                 {duplicatedChildren.map((child, index) => (
-                    <div key={index} className="flex-shrink-0" style={{ 
-            marginRight: index === duplicatedChildren.length - 1 ? '0px' : '40px'}}>
+                    <div key={index} className="flex-shrink-0">
                         {child}
                     </div>
                 ))}
