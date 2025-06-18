@@ -9,7 +9,7 @@ const Carousel = ({children, speed}) => {
         const carousel = carouselRef.current;
         if (!carousel) return;
 
-        const scrollWidth = carousel.scrollWidth / 3;
+        const scrollWidth = carousel.scrollWidth / 2;
         let animationId;
         let currentTranslate = 0;
         
@@ -38,7 +38,7 @@ const Carousel = ({children, speed}) => {
     const duplicatedChildren = [...children, ...children];
     return(
         <div className="overflow-hidden">
-            <div className="flex flex-row" ref={carouselRef}>
+            <div className="flex flex-row pl-10" ref={carouselRef}>
                 {duplicatedChildren.map((child, index) => (
                     <div key={index} className="flex-shrink-0" style={{ 
             marginRight: index === duplicatedChildren.length - 1 ? '0px' : '40px'}}>
