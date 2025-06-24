@@ -1,11 +1,15 @@
-import React from "react";
+import React, { Suspense} from "react";
 import LeafPicture_compressed from "../../../public/images/LeafPicture_compressed.png"
+import WelcomeBack from "./WelcomeBack";
 
-const HeroImage = () => {
+const HeroImage = (props) => {
     return(
         <div className="relative w-full h-screen bg-slate-500">
             <img className="absolute w-full h-full object-cover" src={LeafPicture_compressed.src} alt="Cool colored autumn leaves" />
             <div className="absolute flex flex-col justify-center items-center inset-0 text-white">
+                <Suspense fallback={null}>
+                    <WelcomeBack/>
+                </Suspense>
                 <h1 className="md:text-6xl text-4xl">Chris Schmidt</h1>
                 <div className="flex md:flex-row flex-col text-sm md:pt-0 pt-4">
                     <p className="md:text-2xl md:first-letter:text-5xl first-letter:text-2xl first-letter:font-bold

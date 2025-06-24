@@ -6,7 +6,6 @@ const Carousel = ({children, speed}) => {
     const [isPaused, setIsPaused] = useState(false);
     const carouselRef = useRef(null);
     const currentTranslateRef = useRef(0);
-    const animationRef = useRef(null);
     const isPausedRef = useRef(false);
 
     useEffect(() => {
@@ -15,6 +14,7 @@ const Carousel = ({children, speed}) => {
 
     useEffect(() => {
         const carousel = carouselRef.current;
+        let animationId;
         if (!carousel) return;
 
         const scrollWidth = carousel.scrollWidth / 2;
@@ -29,17 +29,15 @@ const Carousel = ({children, speed}) => {
                 }
 
                 carousel.style.transform = `translateX(-${currentTranslateRef.current}px)`;
-            }
-            
+            }           
             requestAnimationFrame(animateScrolling);
-
         }
 
-        animationRef.current = requestAnimationFrame(animateScrolling);
+        animationId = requestAnimationFrame(animateScrolling);
 
         return () => {
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current);
+            if (animationId) {
+                cancelAnimationFrame(animationId);
             }
         }
     }, [speed]);
@@ -47,7 +45,7 @@ const Carousel = ({children, speed}) => {
     const duplicatedChildren = [...children, ...children];
 
     return(
-        <div className="overflow-hidden w-5/6">
+        <div className="overflow-hidden">
             <div className="flex flex-row pl-10 gap-10" ref={carouselRef} onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
                 {duplicatedChildren.map((child, index) => (
                     <div key={index} className="flex-shrink-0">
