@@ -1,4 +1,4 @@
-import react from "react";
+//Not in Use
 import Link from "next/link";
 
 interface ContentImageProps {
