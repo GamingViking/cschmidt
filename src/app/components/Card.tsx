@@ -12,10 +12,6 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
-    console.log('First button props link:', props.link);
-    console.log('First button props text:', props.linkText);
-    console.log('Second button props link:', props.link2);
-    console.log('First button props text:', props.link2Text);
     return(
         <div className="flex flex-col items-center rounded-xl border-gray-400 border-4">
             <img src={props.image} alt={props.alt} className="sm:h-56 h-64 w-80 sm:w-96 rounded-t-lg" />

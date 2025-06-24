@@ -2,7 +2,7 @@ import React, { Suspense} from "react";
 import LeafPicture_compressed from "../../../public/images/LeafPicture_compressed.png"
 import WelcomeBack from "./WelcomeBack";
 
-const HeroImage = (props) => {
+const HeroImage = () => {
     return(
         <div className="relative w-full h-screen bg-slate-500">
             <img className="absolute w-full h-full object-cover" src={LeafPicture_compressed.src} alt="Cool colored autumn leaves" />
