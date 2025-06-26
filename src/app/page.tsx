@@ -10,7 +10,7 @@ export default function Home() {
       <div className="h-screen overflow-hidden">
         <HeroImage/>
       </div>
-      <div className="bg-gradient-to-b from-slate-500 via-blue-950 to-teal-950 bg-fixed p-4 border-solid">
+      <div className="bg-gradient-to-b from-slate-500 via-blue-950 to-teal-950 bg-fixed p-4 border-solid overflow-hidden">
         <About/>
         <SectionTitle text="Projects" />
         <CarouselRenderer/>    
