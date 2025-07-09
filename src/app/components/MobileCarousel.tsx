@@ -29,13 +29,15 @@ const MobileCarousel = ({children}) => {
     }
     
     return(
-        <div className="overflow-hidden">
-            <div className="flex transition-transform duration-300 ease-out" style={{ transform: `translateX(-${currentIndex * 100}%)`}} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-                {children.map((child, index) => (
-                    <div key={index} className="flex-shrink-0 w-full">
-                        {child}
-                    </div>
-                ))}
+        <div className="relative flex items-center">
+            <div className="w-full overflow-hidden">
+                <div className="flex transition-transform duration-300 ease-out" style={{ transform: `translateX(-${currentIndex * 100}%)`}} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+                    {children.map((child, index) => (
+                        <div key={index} className="flex-shrink-0 flex justify-center items-center min-w-full">
+                            {child}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
