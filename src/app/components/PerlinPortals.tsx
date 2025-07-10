@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { animationManager } from '../AnimationManager';
 
 // TypeScript interface for Perlin noise
 interface PerlinNoiseInterface {
@@ -92,7 +93,7 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height 
     noiseScale: 0.015,
     blendMode: 'multiply' as const,
     opacity: 0.8,
-    layers: 2
+    layers: 1
   };
   
   const generateNoise = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, time: number): void => {
@@ -184,49 +185,53 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height 
     ctx.putImageData(imageData, 0, 0);
   };
   
-  let frameCount = 0;
-  const animate = (): void => {
-    frameCount++;
-    if (frameCount % 2 === 0) {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-        
-        // Set canvas size to match portal dimensions
+    useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    let frameCount = 0;
+    let accumulatedTime = 0;
+    const targetFrameTime = 1000 / 30; // 30fps for portals
+    
+    const portalElement = {
+    update: (deltaTime: number) => {
+      accumulatedTime += deltaTime;
+      
+      if (accumulatedTime >= targetFrameTime) {
         canvas.width = portalWidth;
         canvas.height = portalHeight;
-        
-        timeRef.current += settings.animationSpeed;
-        
-        // Slightly different time offset for variety
+        timeRef.current += settings.animationSpeed * (accumulatedTime / 16.67); // Normalize to 60fps
         const timeOffset = type === 'orange' ? timeRef.current * 0.8 : timeRef.current;
         generateNoise(ctx, canvas, timeOffset);
+        accumulatedTime = 0;
+      }
     }
-    animationRef.current = requestAnimationFrame(animate);
   };
   
-  useEffect(() => {
-    animate();
-    
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, []);
+  animationManager.addElement(portalElement);
   
+  return () => {
+    animationManager.removeElement(portalElement);
+  };
+}, []);
+
+  const renderWidth = portalWidth / 8;
+  const renderHeight = portalHeight / 8;
+
   return (
     <canvas
       ref={canvasRef}
-      width={portalWidth}
-      height={portalHeight}
-      className="drop-shadow-2xl"
+      width={renderWidth}
+      height={renderHeight}
+    //   className="drop-shadow-2xl"
       style={{ 
         width: `${portalWidth}px`,
         height: `${portalHeight}px`,
-        display: 'block'
+        // display: 'block'
+        imageRendering: 'pixelated'
       }}
     />
   );
