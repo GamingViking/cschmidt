@@ -8,7 +8,7 @@ import FellSealCoverImage_compressed from "../../../public/images/FellSealCoverI
 import SuperheroWebsiteImage from "../../../public/images/SuperheroWebsiteImage_compressed.png";
 import BattleshipGame from "../../../public/images/BattleshipGame.png";
 import WebsiteFirstIterationPicture_compressed from "../../../public/images/WebsiteFirstIterationPicture_compressed.png";
-import MobileCarouselWrapper from './MoboleCarouselWrapper';
+import MobileCarouselWrapper from './MobileCarouselWrapper';
 import MobileCarousel from './MobileCarousel';
 
 const CarouselRenderer = () => {

@@ -89,7 +89,7 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height 
   // Current settings from the example
   const settings = {
     animationSpeed: 0.015,
-    noiseScale: 0.012,
+    noiseScale: 0.015,
     blendMode: 'multiply' as const,
     opacity: 0.8,
     layers: 2
@@ -142,18 +142,12 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height 
         if (type === 'blue') {
           // Blue portal gradient
           const gradientFactor = 1 - normalizedDistance;
-        //   baseR = Math.floor(125 + (gradientFactor * 50));  // Light blue to dark blue
-        //   baseG = Math.floor(211 + (gradientFactor * 44));  // Light blue to dark blue
-        //   baseB = Math.floor(252 + (gradientFactor * 3));   // Light blue to dark blue
             baseR = Math.floor(34 + (gradientFactor * -32));   // 34 (cyan-400) to 2 (sky-600)
             baseG = Math.floor(211 + (gradientFactor * -79));  // 211 (cyan-400) to 132 (sky-600)
             baseB = Math.floor(238 + (gradientFactor * -39));  // 238 (cyan-400) to 199 (sky-600)
         } else {
           // Orange portal gradient
           const gradientFactor = 1 - normalizedDistance;
-        //   baseR = Math.floor(253 + (gradientFactor * 2));   // Light orange to dark orange
-        //   baseG = Math.floor(183 + (gradientFactor * 72));  // Light orange to dark orange
-        //   baseB = Math.floor(116 + (gradientFactor * 116)); // Light orange to dark orange
             baseR = Math.floor(253 + (gradientFactor * -2));   // 253 (yellow-300) to 251 (orange-400)
             baseG = Math.floor(224 + (gradientFactor * -78));  // 224 (yellow-300) to 146 (orange-400)
             baseB = Math.floor(71 + (gradientFactor * -11));   // 71 (yellow-300) to 60 (orange-400)
@@ -175,8 +169,8 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height 
         }
         
         // Normalize to 0-1 range
-        noiseValue = (noiseValue + 1) / 2;
-        
+        noiseValue = (noiseValue + 1) / 2;     
+
         // Apply noise to darken the base colors (multiply effect)
         const noiseFactor = 0.3 + (noiseValue * 0.7); // Keep some base color
         
@@ -190,23 +184,26 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height 
     ctx.putImageData(imageData, 0, 0);
   };
   
+  let frameCount = 0;
   const animate = (): void => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    
-    // Set canvas size to match portal dimensions
-    canvas.width = portalWidth;
-    canvas.height = portalHeight;
-    
-    timeRef.current += settings.animationSpeed;
-    
-    // Slightly different time offset for variety
-    const timeOffset = type === 'orange' ? timeRef.current * 0.8 : timeRef.current;
-    generateNoise(ctx, canvas, timeOffset);
-    
+    frameCount++;
+    if (frameCount % 2 === 0) {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        
+        // Set canvas size to match portal dimensions
+        canvas.width = portalWidth;
+        canvas.height = portalHeight;
+        
+        timeRef.current += settings.animationSpeed;
+        
+        // Slightly different time offset for variety
+        const timeOffset = type === 'orange' ? timeRef.current * 0.8 : timeRef.current;
+        generateNoise(ctx, canvas, timeOffset);
+    }
     animationRef.current = requestAnimationFrame(animate);
   };
   

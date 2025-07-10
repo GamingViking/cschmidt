@@ -20,7 +20,6 @@ const Carousel = ({children, speed}) => {
         const scrollWidth = carousel.scrollWidth / 2;
         
         const animateScrolling = () => {
-            console.log("Is it paused: ", isPaused);
             if(!isPausedRef.current) {
                 currentTranslateRef.current += speed / 60;         
                 
