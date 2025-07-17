@@ -6,9 +6,11 @@ interface PortalProps {
   size?: number;
   width?: number;
   height?: number;
+  clipPath?: string;
+  syncTimeRef?: React.RefObject<number>;
 }
 
-export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height }) => {
+export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height, clipPath }) => {
   const portalWidth = width || size;
   const portalHeight = height || size;
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -20,7 +22,7 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height 
   // Keep your render size optimization - but ensure integers
   const renderWidth = Math.floor(portalWidth / 2);
   const renderHeight = Math.floor(portalHeight / 2);
-  
+
   const settings = {
     animationSpeed: 0.02,
     noiseScale: 0.025,
@@ -275,6 +277,10 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height 
     };
   }, [portalWidth, portalHeight, renderWidth, renderHeight, type]);
 
+  useEffect(() => {
+  console.log('Portal mounted with clipPath:', clipPath);
+}, [clipPath]);
+
   return (
     <canvas
       ref={canvasRef}
@@ -283,7 +289,8 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height 
       style={{ 
         width: `${portalWidth}px`,
         height: `${portalHeight}px`,
-        imageRendering: 'pixelated'
+        imageRendering: 'pixelated',
+        clipPath: clipPath || 'none'
       }}
     />
   );
