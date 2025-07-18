@@ -22,7 +22,7 @@ export default function Home() {
             <Interest name="Fell Seal" link="https://www.6eyesstudio.com/fell-seal-arbiter-s-mark" />
             <Interest name="Last Epoch" link="https://lastepoch.com/" />
             <Interest name="Heroes of the Storm" link="https://heroesofthestorm.blizzard.com/en-us/" />
-            <Interest name="Oblivion Remastered" link="https://elderscrolls.bethesda.net/en-US/oblivion-remastered" />
+            <Interest name="Morrowind" link="https://en.uesp.net/wiki/Morrowind:Morrowind" />
           </div>
           <div className="flex flex-col">
             <div className="text-white text-xl font-bold text-center mb-2">Listening To</div>
@@ -43,7 +43,6 @@ export default function Home() {
         </div>
         <div className="text-white text-center p-4">Thank you for taking the time to browse my site - I hope you found something you liked! Feel free to reach out to me: cmschmidt12345@gmail.com</div>
         <div className="flex lg:flex-row flex-col lg:justify-evenly items-center p-4">
-          <Interest name="This Site" link="https://github.com/GamingViking/cschmidt" />
           <Interest name="Github" link="https://github.com/GamingViking" />
           <Interest name="My Email: A History" link="https://www.youtube.com/watch?v=_JNGI1dI-e8" />
         </div>

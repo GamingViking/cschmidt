@@ -24,12 +24,17 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       animation: {
-        "text-gradient": "text-gradient 3s ease infinite alternate"
+        "text-gradient": "text-gradient 3s ease infinite alternate",
+        "swipe-gradient": "swipe-gradient 5s ease infinite alternate",
       },
       keyframes: {
         "text-gradient": {
           "0, 100%": { "background-size" : "200% 200%", "background-position": "left center"},
           "50%": { "background-size" : "200% 200%", "background-position": "right center" },
+        },
+        "swipe-gradient": {
+          "0%" : { "background-size" : "400% 400%", "background-position" : "left center"},
+          "100%" : { "background-size" : "400% 400%", "background-position" : "right center"},
         }
       }
     },

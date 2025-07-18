@@ -27,6 +27,10 @@ const MobileCarousel = ({children}) => {
             }
         }
     }
+
+    const goToSlide = (index) => {
+        setCurrentIndex(index);
+    }
     
     return(
         <div className="relative flex items-center">
@@ -38,6 +42,19 @@ const MobileCarousel = ({children}) => {
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="absolute -bottom-9 left-1/2 transform -translate-x-1/2 flex gap-10">
+                {children.map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => goToSlide(index)}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                            currentIndex === index
+                                ? "bg-pink-500 scale-150 border-solid border-2 border-pink-300"
+                                : "bg-gray-300 hover:bg-gray-500"
+                        }`}
+                    />
+                ))}
             </div>
         </div>
     );
