@@ -11,14 +11,14 @@ const CarouselWrapper = ({children}) => {
                     <div className="absolute -left-[110px] -top-[54px] h-[620px] w-[220px] bg-gradient-radial from-orange-400 from-60% to bg-transparent to-70% rounded-[50%]"></div>
                     <div className="absolute -left-[120px] -top-[64px]">
                         <Portal type="orange" width={240} height={660}/>
-                        <div className="absolute top-[30px] z-10">
-                            <div className="absolute -top-[30px] opacity-80">
+                        <div className="absolute left-24 top-[30px] z-10">
+                            <div className="absolute -left-24 -top-[30px] opacity-80">
                                 <Portal type="orange" width={240} height={660} isWavyOverlay={true} pathXAdjustment={65}/>
                             </div>
-                            <div className="absolute -top-[30px] opacity-80">
+                            <div className="absolute -left-24 -top-[30px] opacity-80">
                                 <Portal type="orange" width={240} height={660} isWavyOverlay={true} pathXAdjustment={70} />
                             </div>
-                            <div className="absolute -top-[30px] opacity-80">
+                            <div className="absolute -left-24 -top-[30px] opacity-80">
                                 <Portal type="orange" width={240} height={660} isWavyOverlay={true} pathXAdjustment={75}/>
                             </div>
                         </div>
