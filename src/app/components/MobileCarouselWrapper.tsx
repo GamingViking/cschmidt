@@ -5,7 +5,7 @@ const MobileCarouselWrapper = ({children}) => {
         <div>
             <div className="flex justify-center my-10">
                 <div className="relative z-0 w-full max-w-md">
-                    <div className="absolute inset-0 justify-center -top-8 z-10 flex text-lg text-transparent bg-clip-text bg-gradient-to-r from-white via-black to-white animate-swipe-gradient bg-[length:200%]">
+                    <div className="absolute inset-0 justify-center -top-8 z-10 flex text-lg text-transparent bg-clip-text bg-gradient-to-r from-white via-black to-white font-bold animate-swipe-gradient bg-[length:200%]">
                        {"<< Swipe Images >>"}
                     </div>
                     <div className="absolute -left-[120px] -top-[64px]">

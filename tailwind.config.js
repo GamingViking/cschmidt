@@ -33,8 +33,8 @@ module.exports = {
           "50%": { "background-size" : "200% 200%", "background-position": "right center" },
         },
         "swipe-gradient": {
-          "0%" : { "background-size" : "400% 400%", "background-position" : "100% 0%"},
-          "100%" : { "background-size" : "400% 400%", "background-position" : "0% 0%"},
+          "0%" : { "background-size" : "400% 400%", "background-position" : "left center"},
+          "100%" : { "background-size" : "400% 400%", "background-position" : "right center"},
         }
       }
     },
