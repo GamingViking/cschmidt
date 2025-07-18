@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react";
+import { animationManager } from "../AnimationManager";
 
 const Carousel = ({children, speed}) => {
     const [isPaused, setIsPaused] = useState(false);
@@ -14,32 +15,33 @@ const Carousel = ({children, speed}) => {
 
     useEffect(() => {
         const carousel = carouselRef.current;
-        let animationId;
         if (!carousel) return;
 
         const scrollWidth = carousel.scrollWidth / 2;
         
-        const animateScrolling = () => {
-            console.log("Is it paused: ", isPaused);
-            if(!isPausedRef.current) {
-                currentTranslateRef.current += speed / 60;         
-                
-                if(currentTranslateRef.current >= scrollWidth) {
-                    currentTranslateRef.current = 0;
+             const carouselElement = {
+            update: (deltaTime: number) => {
+                if (!isPausedRef.current) {
+                    // Convert your speed to be frame-rate independent
+                    // deltaTime is in milliseconds, normalize to 60fps (16.67ms per frame)
+                    currentTranslateRef.current += (speed / 60) * (deltaTime / 16.67);
+                    
+                    if (currentTranslateRef.current >= scrollWidth) {
+                        currentTranslateRef.current = 0;
+                    }
+
+                    carousel.style.transform = `translateX(-${currentTranslateRef.current}px)`;
                 }
+            }
+        };
 
-                carousel.style.transform = `translateX(-${currentTranslateRef.current}px)`;
-            }           
-            requestAnimationFrame(animateScrolling);
-        }
-
-        animationId = requestAnimationFrame(animateScrolling);
+        // Register with animation manager instead of requestAnimationFrame
+        animationManager.addElement(carouselElement);
 
         return () => {
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-            }
-        }
+            // Remove from animation manager instead of cancelAnimationFrame
+            animationManager.removeElement(carouselElement);
+        };
     }, [speed]);
 
     const duplicatedChildren = [...children, ...children];
