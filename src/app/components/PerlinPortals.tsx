@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { animationManager } from '../AnimationManager';
 
 interface PortalProps {
@@ -7,10 +7,11 @@ interface PortalProps {
   width?: number;
   height?: number;
   clipPath?: string;
-  syncTimeRef?: React.RefObject<number>;
+// syncTimeRef?: React.RefObject<number>;
+  isWavyOverlay?: boolean;
 }
 
-export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height, clipPath }) => {
+export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height, clipPath, isWavyOverlay = false }) => {
   const portalWidth = width || size;
   const portalHeight = height || size;
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,6 +19,7 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height,
   const timeRef = useRef<number>(0);
   const pendingFrameRef = useRef<boolean>(false);
   const lastFrameTimeRef = useRef<number>(0);
+  const [animationTime, setAnimationTime] = useState(0);
   
   // Keep your render size optimization - but ensure integers
   const renderWidth = Math.floor(portalWidth / 2);
@@ -29,6 +31,44 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height,
     layers: 2
   };
   
+  const createAnimatedWavyClipPath = (type: 'orange' | 'blue'): string => {
+    const points: string[] = [];
+    const numPoints = 30; // Enough for smooth animation
+    
+    if (type === 'orange') {
+      // Straight left edge
+      for (let i = 0; i <= numPoints; i++) {
+      const y = (i / numPoints) * 100;
+      points.push(`0% ${y}%`);
+      }
+      
+      // Animated wavy right edge
+      for (let i = numPoints; i >= 0; i--) {
+      const y = (i / numPoints) * 100;
+      // Multiple sine waves with different frequencies and phases
+      const wave1 = Math.sin((y / 100) * Math.PI * 3 + animationTime) * 8;
+      const wave2 = Math.sin((y / 100) * Math.PI * 5 + animationTime * 1.5) * 4;
+      const wave3 = Math.sin((y / 100) * Math.PI * 7 + animationTime * 0.7) * 2;
+      
+      const waveOffset = wave1 + wave2 + wave3;
+      const x = 70 + waveOffset;
+      points.push(`${Math.max(50, Math.min(90, x))}% ${y}%`); // Clamp between 50-90%
+      }
+    }   
+  return `polygon(${points.join(', ')})`;
+  };
+  
+  useEffect(() => {
+    if (!isWavyOverlay) return;
+    
+    const interval = setInterval(() => {
+      setAnimationTime(prev => prev + 0.1);
+    }, 33); // 20fps animation
+    
+    return () => clearInterval(interval);
+  }, [isWavyOverlay]);
+    
+
   // Create the worker script as an inline string
   const createWorkerScript = () => {
     const workerScript = `
@@ -290,7 +330,7 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height,
         width: `${portalWidth}px`,
         height: `${portalHeight}px`,
         imageRendering: 'pixelated',
-        clipPath: clipPath || 'none'
+        clipPath: isWavyOverlay ? createAnimatedWavyClipPath(type) : (clipPath || 'none')
       }}
     />
   );

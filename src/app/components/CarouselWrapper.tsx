@@ -1,45 +1,7 @@
 import { Portal } from "./PerlinPortals";
 import { useEffect, useState } from 'react';
 
-const CarouselWrapper = ({children}) => {
-    const createAnimatedWavyClipPath = (type: 'blue' | 'orange', animationTime: number): string => {
-        const points: string[] = [];
-        const numPoints = 30; // Enough for smooth animation
-        
-        if (type === 'orange') {
-            // Straight left edge
-            for (let i = 0; i <= numPoints; i++) {
-            const y = (i / numPoints) * 100;
-            points.push(`0% ${y}%`);
-            }
-            
-            // Animated wavy right edge
-            for (let i = numPoints; i >= 0; i--) {
-            const y = (i / numPoints) * 100;
-            // Multiple sine waves with different frequencies and phases
-            const wave1 = Math.sin((y / 100) * Math.PI * 3 + animationTime) * 8;
-            const wave2 = Math.sin((y / 100) * Math.PI * 5 + animationTime * 1.5) * 4;
-            const wave3 = Math.sin((y / 100) * Math.PI * 7 + animationTime * 0.7) * 2;
-            
-            const waveOffset = wave1 + wave2 + wave3;
-            const x = 70 + waveOffset;
-            points.push(`${Math.max(50, Math.min(90, x))}% ${y}%`); // Clamp between 50-90%
-            }
-        }
-        
-    return `polygon(${points.join(', ')})`;
-    };
-
-// Usage in component:
-const [animationTime, setAnimationTime] = useState(0);
-
-useEffect(() => {
-  const interval = setInterval(() => {
-    setAnimationTime(prev => prev + 0.1);
-  }, 50); // 20fps animation
-  
-  return () => clearInterval(interval);
-}, []);
+const CarouselWrapper = ({children}) => {  
 
     return(
         <div>
@@ -51,7 +13,7 @@ useEffect(() => {
                         <Portal type="orange" width={240} height={660}/>
                         <div className="absolute left-24 top-[30px] rounded-full z-10 opacity-80">
                             <div className="absolute -left-24 -top-[30px]">
-                                <Portal type="orange" width={240} height={660} clipPath={createAnimatedWavyClipPath('orange', animationTime)} />
+                                <Portal type="orange" width={240} height={660} isWavyOverlay={true} />
                             </div>
                         </div>
                     </div>
