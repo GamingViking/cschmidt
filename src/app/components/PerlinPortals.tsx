@@ -7,11 +7,11 @@ interface PortalProps {
   width?: number;
   height?: number;
   clipPath?: string;
-// syncTimeRef?: React.RefObject<number>;
   isWavyOverlay?: boolean;
+  pathXAdjustment?: number;
 }
 
-export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height, clipPath, isWavyOverlay = false }) => {
+export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height, clipPath, isWavyOverlay = false, pathXAdjustment = 70 }) => {
   const portalWidth = width || size;
   const portalHeight = height || size;
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -46,21 +46,42 @@ export const Portal: React.FC<PortalProps> = ({ type, size = 300, width, height,
       for (let i = numPoints; i >= 0; i--) {
       const y = (i / numPoints) * 100;
       // Multiple sine waves with different frequencies and phases
-      const wave1 = Math.sin((y / 100) * Math.PI * 3 + animationTime) * 8;
-      const wave2 = Math.sin((y / 100) * Math.PI * 5 + animationTime * 1.5) * 4;
+      const wave1 = Math.sin((y / 100) * Math.PI * 3 + animationTime * 0.3) * 8;
+      const wave2 = Math.sin((y / 100) * Math.PI * 5 + animationTime * 1) * 4;
       const wave3 = Math.sin((y / 100) * Math.PI * 7 + animationTime * 0.7) * 2;
       
       const waveOffset = wave1 + wave2 + wave3;
-      const x = 70 + waveOffset;
+      const x = pathXAdjustment + waveOffset;
       points.push(`${Math.max(50, Math.min(90, x))}% ${y}%`); // Clamp between 50-90%
       }
+    } else {
+      //Blue Portal
+      // Straight right edge
+      for (let i = 0; i <= numPoints; i++) {
+      const y = (i / numPoints) * 100;
+      points.push(`100% ${y}%`);
+      }
+      
+      // Animated wavy left edge
+      for (let i = numPoints; i >= 0; i--) {
+      const y = (i / numPoints) * 100;
+      // Multiple sine waves with different frequencies and phases
+      const wave1 = Math.sin((y / 100) * Math.PI * 3 + animationTime * 0.3) * 8;
+      const wave2 = Math.sin((y / 100) * Math.PI * 5 + animationTime * 0.7) * 4;
+      const wave3 = Math.sin((y / 100) * Math.PI * 7 + animationTime * 1) * 2;
+      
+      const waveOffset = wave1 + wave2 + wave3;
+      const x = pathXAdjustment - waveOffset;
+      points.push(`${Math.max(10, Math.min(50, x))}% ${y}%`); // Clamp between 10-50%
+      }
     }   
+
   return `polygon(${points.join(', ')})`;
   };
   
   useEffect(() => {
     if (!isWavyOverlay) return;
-    
+
     const interval = setInterval(() => {
       setAnimationTime(prev => prev + 0.1);
     }, 33); // 20fps animation
